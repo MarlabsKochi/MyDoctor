@@ -1,17 +1,64 @@
 
-
 <div class="container">
- <h2>Listing Doctors for <%= @doctor_category.name%></h2>
- <% @doctors.all.each do |doctor| %>
-	  <ul class="list-group">
-	    <li class="list-group-item"><span class="badge"></span> 
-	    <%= link_to doctor.name.capitalize, doctor %><br />
-	    <%= "#{doctor.experience} years of experience"%><br />
-	    <%= "Working at #{doctor.hospital_name}" %><br />
-	    </li>
-	  </ul>
+      <form class="form-inline" role="form">
+            <div class="form-group">
+                 <%= form_tag("/doctor_categories/#{params[:id]}", method: "get") do %>
+            <div class="field" >
+                 <%= select_tag "state", options_from_collection_for_select(CS.states(:in),:first, :last) , :prompt => '--Select State--'%>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <div class="field" id='home-state-cities' >
+                 <%= select_tag "city", @cities, :prompt => '--Select City--'%>
+            </div>
+            </div>
+
+     &nbsp       <%= button_tag(type: "submit", class: "btn btn-success") do %>
+    Search <i class="icon-repeat"></i>
+<% end %>
+
+            
+
   <% end %>
+
+
+    
+
+
+  <ul class="nav pull-right">
+  <div class="dropdown">
+  
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Doctor Category
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="/doctor_categories/12">physician</a></li>
+      <li><a href="/doctor_categories/13">cardiologist</a></li>
+      <li><a href="/doctor_categories/14">pediatrician</a></li>
+      <li><a href="/doctor_categories/11">deitician</a></li>
+      <li><a href="/doctor_categories/15">opthalmologist</a></li></div>
+
+    </ul>
+    </ul>
+  
+  
+
+
+
+
+    <h2>Listing Doctors for <%= @doctor_category.name%></h2>
+    <% @doctors.all.each do |doctor| %>
+	     <ul class="list-group">
+	        <li class="list-group-item"><span class="badge"></span> 
+	        <%= link_to doctor.name.capitalize, doctor %><br />
+	        <%= "#{doctor.experience} years of experience"%><br />
+	        <%= "Working at #{doctor.hospital_name}" %><br />
+	        </li>
+	     </ul>
+    <% end %>
+
 </div>
+</form>
 
 
 	<!-- <div class="container">
@@ -30,3 +77,35 @@
 
 <%#= link_to 'Edit', edit_doctor_category_path(@doctor_category) %> 
 <%#= link_to 'Back', doctor_categories_path data-target="#demo#{doctor.id}"> %>
+
+
+<script type="text/javascript">
+  
+
+  $(document).ready(function(){ 
+    $("#state").click(function(){
+
+        var state1 = $('#state').val();
+        $.ajax({
+          method: "GET",
+          url: "http://localhost:3000/cities",
+          data: { state:state1 }
+        })
+
+        .done(function( cities ) {
+          var cityElm=$("#home-state-cities")
+          var optValues=""
+          cityElm.css("display","block")
+
+          for (i = 0; i < cities.length; i++) { 
+            optValues += "<option>" + cities[i] + "</option>";
+          }
+          cityElm.html("<select name=city>" + optValues+ "</select>")  
+        });
+      } 
+    );
+
+
+  });
+    
+</script>
