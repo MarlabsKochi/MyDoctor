@@ -68,7 +68,7 @@ class DoctorsController < ApplicationController
 
     def get_cities
       state = params[:state]  ? params[:state] : @doctor.state
-      @cities = CS.cities(state, :in) if state
+      @cities = state ? CS.cities(state, :in) : []
     end
 
 end

@@ -7,7 +7,13 @@ def index
 end
 
 def show
-  @doctors = @doctor_category.doctors.active
+  if !params[:state].blank? and !params[:city].blank?
+  @doctors =  @doctor_category.doctors.active
+                .where(state:params[:state],city:params[:city])
+
+  else
+  @doctors = @doctor_category.doctors.active 
+end
 end
 
 def new

@@ -55,10 +55,10 @@
   <% end %> 
 
   <div class="actions">
-    <%= button_tag "Update", :class => 'button right', :id => 'update_doctor'%>
+    <%= f.submit "Update", :class => 'button right', :id => 'update_doctor'%>
   </div>
-  
-<% end %>
+  <% end %>
+
 
 <script type="text/javascript">
   $(document).ready(function(){ 
@@ -67,7 +67,7 @@
         var state1 = $('#doctor_state').val();
         $.ajax({
           method: "GET",
-          url: "http://localhost:3000/cities/",
+          url: "/cities",
           data: { state:state1 }
         })
 

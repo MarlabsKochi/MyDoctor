@@ -7,15 +7,20 @@
 <% end %>
 
 <% if (!doctor_signed_in?) %>
-	<div class="container">
-	 <h2>Doctor Categories</h2>
-	 <% DoctorCategory.all.each do |doctor_category| %>
-		  <ul class="list-group">
-		    <li class="list-group-item"><span class="badge"><%= doctor_category.doctors.count %></span> 
-		    <%= link_to doctor_category.name, doctor_category %></li>
-		  </ul>
-	  <% end %>
-	</div>
+
+<div class="container">
+
+
+</br>
+
+   <h2>Doctor Categories</h2>
+   <% DoctorCategory.all.each do |doctor_category| %>
+      <ul class="list-group">
+        <li class="list-group-item"><span class="badge"><%= doctor_category.doctors.count %></span> 
+        <%= link_to doctor_category.name, doctor_category %></li>
+      </ul>
+    <% end %>
+  </div>
 <% else %>
 
 <div class="container">
@@ -39,5 +44,15 @@
     </div>
   </div>
 </div>
+</div>
 
 <%end%>
+
+
+
+
+
+
+  
+
+
