@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   resources :doctor_categories
+  resources :time_slots
   get 'cities/', to: 'doctors#cities'
 end

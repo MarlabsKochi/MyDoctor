@@ -1,0 +1,65 @@
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Manage Your Time Slots</h4>
+        </div>
+        <div class="modal-body">
+          <%= render partial: 'time_slots/form' %>
+          <div style="color:black;" id="doctor-time-slots">
+            <%= render partial: 'time_slots/time_slots' %>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+      
+    </div>
+  </div>
+
+<script>
+	$(function(){
+    $('#from').combodate({
+        firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
+        minuteStep: 1
+    });
+
+    $('#to').combodate({
+        firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
+        minuteStep: 1
+    }); 
+
+    $('#duration').combodate({
+      firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
+      minuteStep: 1
+    })
+
+    $('#sub_new_slots').click(function(){
+    	var weekArr = []
+      $('#weeksField input:checked').each(function() {
+        weekArr.push($(this).val());
+      });
+
+      $.ajax({
+        method: "post",
+        url: "/time_slots",
+        data: { time_slot: {doctor_id:"<%=@doctor.id%>",
+          from: $("#from").val(),
+          to: $('#to').val(),
+          duration: $('#duration').val()},
+          week_days: weekArr }
+      })
+        .done(function( data ) {
+          $("#doctor-time-slots").html(data)
+        });
+    })
+
+	});
+
+
+</script>

@@ -27,12 +27,19 @@
 
 <div class="container">
   <div class="jumbotron">
-    <h1><%= link_to @doctor.name.capitalize %></h1>
-      <% if @doctor.avatar.present? %>
-        <%= image_tag @doctor.avatar.url(:small) %>
-      <% else %>
-        <%= image_tag("missing_doctor_avatar.png",size: "100x100") %>
-      <% end %>
+    <div class="row">
+      <div class="col-sm-4">
+        <h1><%= link_to @doctor.name.capitalize %></h1>
+      </div>
+      <div class="col-sm-4 col-sm-offset-4">
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Manage Appointment</button>
+      </div>
+    </div>
+    <% if @doctor.avatar.present? %>
+      <%= image_tag @doctor.avatar.url(:small) %>
+    <% else %>
+      <%= image_tag("missing_doctor_avatar.png",size: "100x100") %>
+    <% end %>
   </div>
   <div class="row">
     <div class="col-sm-4">
@@ -50,5 +57,6 @@
     </div>
   </div>
 </div>
+<%=render :partial => "doctors/manage_appointment"%>
 
 <%end%>
