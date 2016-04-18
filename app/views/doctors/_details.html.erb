@@ -5,9 +5,11 @@
       <div class="col-sm-4">
         <h1><%= link_to @doctor.name.capitalize %></h1>
       </div>
-      <div class="col-sm-4 col-sm-offset-4">
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Manage Appointment</button>
-      </div>
+      <% if doctor_signed_in? && current_doctor == @doctor %>
+        <div class="col-sm-4 col-sm-offset-4">
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Manage Appointment</button>
+        </div>
+      <% end %>
     </div>
     <div class="row">
       <div class="col-sm-4" id="doctor-image">
@@ -20,8 +22,10 @@
       <div class="col-sm-4" id="image-loader" style="padding-top: 5%;padding-left: 9%;display:none;"><%=image_tag 'ajax-loader.gif'%>
       </div>
     </div>
-  <%= form_for(@doctor,  html: { multipart: true, id:'form-avatar' }) do |f| %>
-    <%= f.file_field :avatar, id: "doctor-avatar", style: "display:none" %> 
+  <% if doctor_signed_in? && current_doctor == @doctor %>
+    <%= form_for(@doctor,  html: { multipart: true, id:'form-avatar' }) do |f| %>
+      <%= f.file_field :avatar, id: "doctor-avatar", style: "display:none" %> 
+    <% end %>
   <% end %>
   <div class="row">
     <div class="col-sm-4">
@@ -43,15 +47,17 @@
 <%=render :partial => "doctors/manage_appointment"%>
 
 <script type="text/javascript">
+  var checkDoc = "<%=doctor_signed_in?%>" 
+  if(checkDoc != false){
+    $("#doctor-image").click(function(){
+      $("#doctor-avatar").click();
+    })
 
-  $("#doctor-image").click(function(){
-    $("#doctor-avatar").click();
-  })
+    $("#doctor-avatar").change(function(){
+      $("#form-avatar").submit(); 
+      $("#doctor-image").css("display", "none");
+      $("#image-loader").css("display", "block");
+    });
+  }
 
-  $("#doctor-avatar").change(function(){
-    $("#form-avatar").submit(); 
-    $("#doctor-image").css("display", "none");
-    $("#image-loader").css("display", "block");
-  });
-  
 </script>
