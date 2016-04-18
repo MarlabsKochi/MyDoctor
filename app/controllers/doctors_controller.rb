@@ -3,6 +3,7 @@ class DoctorsController < ApplicationController
   before_action :get_cities, only: [:edit, :cities]
   before_action :set_time_slots, only: [:show]
   include EntityHelper
+
   def index
     @doctors = Doctor.all
   end
