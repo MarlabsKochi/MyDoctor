@@ -8,7 +8,7 @@ feature 'Edit Doctor Category' do
     visit "doctor_categories/#{dc.id}/edit"
     fill_in "doctor_category_name", :with => "My test name"
     click_button "Submit"
-    expect(page).to have_content 'doctor category was successfully updated.'
+    expect(page).to have_content 'Doctorcategory was successfully updated'
   end
 
   scenario 'Edit doctor category with blank name' do
