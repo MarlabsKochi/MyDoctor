@@ -9,12 +9,20 @@
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Manage Appointment</button>
       </div>
     </div>
-    <% if @doctor.avatar.present? %>
-      <%= image_tag @doctor.avatar.url(:small) %>
-    <% else %>
-      <%= image_tag("missing_doctor_avatar.png",size: "100x100") %>
-    <% end %>
-  </div>
+    <div class="row">
+      <div class="col-sm-4" id="doctor-image">
+        <% if @doctor.avatar.present? %>
+          <%= image_tag @doctor.avatar.url(:small) %>
+        <% else %>
+          <%= image_tag("missing_doctor_avatar.png",size: "100x100") %>
+        <% end %>
+      </div>
+      <div class="col-sm-4" id="image-loader" style="padding-top: 5%;padding-left: 9%;display:none;"><%=image_tag 'ajax-loader.gif'%>
+      </div>
+    </div>
+  <%= form_for(@doctor,  html: { multipart: true, id:'form-avatar' }) do |f| %>
+    <%= f.file_field :avatar, id: "doctor-avatar", style: "display:none" %> 
+  <% end %>
   <div class="row">
     <div class="col-sm-4">
       <h3>About</h3>
@@ -33,7 +41,19 @@
 </div>
 <%=render :partial => "doctors/manage_appointment"%>
 
+<script type="text/javascript">
 
+  $("#doctor-image").click(function(){
+    $("#doctor-avatar").click();
+  })
+
+  $("#doctor-avatar").change(function(){
+    $("#form-avatar").submit(); 
+    $("#doctor-image").css("display", "none");
+    $("#image-loader").css("display", "block");
+  });
+
+</script>
 
 
 
