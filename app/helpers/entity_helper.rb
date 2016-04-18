@@ -24,7 +24,7 @@ module EntityHelper
   def update_entity(entity,params)
     respond_to do |format|
       if entity.update(params)
-        format.html { redirect_to "/"+entity.class.table_name, notice: "#{entity.class.to_s.capitalize} was successfully updated" }
+        format.html { redirect_to "/"+entity.class.table_name+"/#{entity.id}", notice: "#{entity.class.to_s.capitalize} was successfully updated" }
         format.json { render :show, status: :ok, location: entity }
       else
         format.html { render :edit }
