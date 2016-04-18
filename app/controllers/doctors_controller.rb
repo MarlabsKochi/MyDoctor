@@ -1,7 +1,7 @@
 class DoctorsController < ApplicationController
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
   before_action :get_cities, only: [:edit, :cities]
-  
+  before_action :set_time_slots, only: [:show]
   def index
     @doctors = Doctor.all
   end
@@ -59,6 +59,10 @@ class DoctorsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_doctor
       @doctor = Doctor.find(params[:id])
+    end
+
+    def set_time_slots
+      @time_slots = @doctor.time_slots
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
