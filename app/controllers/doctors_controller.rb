@@ -2,7 +2,8 @@ class DoctorsController < ApplicationController
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
   before_action :get_cities, only: [:edit, :cities]
   before_action :set_time_slots, only: [:show]
-  
+  include EntityHelper
+
   def index
     @doctors = Doctor.all
   end
@@ -23,37 +24,15 @@ class DoctorsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @doctor.update(doctor_params)
-        format.html { redirect_to @doctor, notice: 'doctor was successfully updated.' }
-        format.json { render :show, status: :ok, location: @doctor }
-      else
-        format.html { render :edit }
-        format.json { render json: @doctor.errors, status: :unprocessable_entity }
-      end
-    end
+    update_entity(@doctor, doctor_params)
   end
 
   def create
-    @doctor= Doctor.new(doctor_params)
-
-    respond_to do |format|
-      if @doctor.save
-        format.html { redirect_to @doctor, notice: 'doctor uploaded'}
-	format.json { render :show, status: :created, location: @doctor }
-      else
-	format.html { render :new }
-	format.json { render json: @doctor.errors, status: :unprocessable_entity }
-      end
-    end
+    create_entity(Doctor, doctor_params)
   end
 
   def destroy
-    @doctor.destroy
-    respond_to do |format|
-      format.html { redirect_to doctors_url, notice: 'doctor was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    destroy_entity(@doctor)
   end
 
   private

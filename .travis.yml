@@ -2,7 +2,7 @@ language: ruby
 rvm:
   - "2.2.3"
 env:
-  - CODECLIMATE_REPO_TOKEN=7f411420beecb3181eab64d6b6deed6d989ecda4ae0816bfa7c8bfc08a9c6e02
+  - CODECLIMATE_REPO_TOKEN=9d60952ac2b6a8fbf784673dfa47660b73283eb970f30d28c720b3ad6a9f34dd
 script: 
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
