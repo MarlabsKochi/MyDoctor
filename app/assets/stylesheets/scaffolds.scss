@@ -1,8 +1,17 @@
 body {
-  color: #28B6E4;
+  color: black;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+}
+
+.list-group-item {
+background-color: rgba(30, 213, 243, 0.31);
+border: 1px solid #5F0B0B;  
+}
+
+.jumbotron {
+    background-color: rgba(97, 144, 162, 0.4);
 }
 
 p, ol, ul, td {
@@ -12,7 +21,7 @@ p, ol, ul, td {
 }
 
 pre {
-  background-color: #eee;
+  background-color: transparent;
   padding: 10px;
   font-size: 11px;
 }
@@ -21,12 +30,12 @@ a {
   color: #000;
 
   &:visited {
-    color: #666;
+    color: #131313;
   }
 
   &:hover {
-    color: #fff;
-    background-color: #000;
+    color: red;
+    background-color: rgba(138, 63, 63, 0.25);
   }
 }
 
@@ -69,4 +78,8 @@ div {
     font-size: 12px;
     list-style: square;
   }
+}
+
+.body-login {
+  background-image: url('doctor.jpg');
 }

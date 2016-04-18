@@ -8,22 +8,29 @@
 <% end %>
 
 <% if (!doctor_signed_in?) %>
+<div class="row">
 	<div class="container">
 	 <h2>Doctor Categories</h2>
+   
 	 <% DoctorCategory.all.each do |doctor_category| %>
+   <div class="col-md-3">
 		  <ul class="list-group">
       <li class="list-group-item">
         <% if doctor_category.avatar.present? %>
-          <%= image_tag doctor_category.avatar.url(:tiny) %>
+          <%= image_tag(doctor_category.avatar.url(:medium),size: "130x100") %>
         <% else %>
-          <%= image_tag("missing_doctor_category_avatar.png",size: "50x50") %>
+          <%= image_tag("missing_doctor_category_avatar.png") %>
         <% end %></li>
 		    <li class="list-group-item"><span class="badge"><%= doctor_category.doctors.active.count %></span> 
-        <%= link_to doctor_category.name, doctor_category %></li>
+        <b><%= link_to doctor_category.name, doctor_category %></li></b>
 		  </ul>
+      </div>
 	  <% end %>
+    
 	</div>
+  </div>
 <% else %>
+
 
 <%= render partial: "/doctors/details"%>
 

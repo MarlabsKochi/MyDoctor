@@ -2,6 +2,7 @@ class DoctorsController < ApplicationController
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
   before_action :get_cities, only: [:edit, :cities]
   before_action :set_time_slots, only: [:show]
+  
   def index
     @doctors = Doctor.all
   end
