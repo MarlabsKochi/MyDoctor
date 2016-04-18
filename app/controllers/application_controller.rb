@@ -3,6 +3,18 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  layout :resolve_layout
+   
+  private
+
+    def resolve_layout
+      if action_name == "new"
+        "login"
+      else
+        "application"
+      end
+    end
+
 
   protected
 
