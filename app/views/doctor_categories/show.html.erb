@@ -1,82 +1,80 @@
 <div class="container">
-  <form class="form-inline" role="form">
-    <div class="form-group">
-      <%= form_tag("/doctor_categories/#{params[:id]}", method: "get") do %>
-      <div class="field" >
-        <%= select_tag "state", options_from_collection_for_select(CS.states(:in),:first, :last) , :prompt => '--Select State--'%>
+  <div class="row">
+    <div class="col-md-7">
+      <form class="form-inline" role="form">
+        <%= form_tag("/doctor_categories/#{params[:id]}", method: "get") do %>
+          <div class="form-group">
+            <div class="field" >
+              <%= select_tag "state", options_from_collection_for_select(CS.states(:in),:first, :last) , :prompt =>'--Select State--', class: "form-control"%>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="field" id='home-state-cities' >
+              <%= select_tag "city", @cities, :prompt => '--Select City--', class: "form-control"%>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="field">
+              <%= submit_tag("Search", class: "btn btn-success") %>
+            </div>
+          </div>
+        <% end %> 
+      </form>
+    </div>
+    <div class="col-md-2 col-md-offset-3">
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Doctor Category
+        <span class="caret"></span></button>
+         <ul class="dropdown-menu">
+            <% DoctorCategory.all.each do |dc|%>
+              <li><%= link_to dc.name, doctor_category_path(dc.id) %></li>
+           <% end %>
+          </ul>
       </div>
     </div>
-
-    <div class="form-group">
-      <div class="field" id='home-state-cities' >
-        <%= select_tag "city", @cities, :prompt => '--Select City--'%>
-      </div>
-    </div>
-    &nbsp<%= button_tag(type: "submit", class: "btn btn-success") do %>
-    Search <i class="icon-repeat"></i>
-<% end %>
-  <% end %>
-
-  <ul class="nav pull-right">
-  <div class="dropdown">
-  
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Doctor Category
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-      <% DoctorCategory.all.each do |dc|%>
-        <li><%= link_to dc.name, doctor_category_path(dc.id) %></li>
-        <% end %>
-
-    </ul>
-    </div>
-    </ul>
-
-    <h2>Listing Doctors for <%= @doctor_category.name%></h2>
-    <% @doctors.all.each do |doctor| %>
-	     <ul class="list-group">
-	        <li class="list-group-item"><span class="badge"></span> 
-	        <%= link_to doctor.name.capitalize, doctor %><br />
-	        <%= "#{doctor.experience} years of experience"%><br />
-	        <%= "Working at #{doctor.hospital_name}" %><br />
-	        </li>
-	     </ul>
-    <% end %>
-
+  </div>
 </div>
-</form>
 
-
-	<!-- <div class="container">
-	  <h2>Doctors</h2>
-	  <% @doctors.all.each do |doctor| %>
-		  <button type="button" class="btn btn-info" data-toggle="collapse" 
-		  data-target= "#demo_#{doctor.id.to_s}" %><%= doctor.name %></button>
-		  <div id="demo_#{doctor.id}" class="collapse">
-			    <%= link_to doctor.name.capitalize, doctor %><br />
-			    <%= "#{doctor.experience} years of experience"%><br />
-			    <%= "Working at #{doctor.hospital_name}" %><br />
-		  </div>
-		  <br />
-	  <%end%>
-	</div> -->
-
-<%#= link_to 'Edit', edit_doctor_category_path(@doctor_category) %> 
-<%#= link_to 'Back', doctor_categories_path data-target="#demo#{doctor.id}"> %>
-
+<div class="container">
+  <h2>Listing Doctors for <%= @doctor_category.name%></h2>
+  <div class="row">
+    <% @doctors.all.each do |doctor| %>
+	    <div class="col-md-3" style="margin-bottom:2%;">
+        <div class="list-group-item" style="width:95%;background:white;">
+          <div class="row">
+            <div class="col-md-4">
+              <% if doctor.avatar.present? %>
+                <%= image_tag(doctor.avatar.url(:small), size: "80x80") %>
+              <% else %>
+                <%= image_tag("missing_doctor_avatar.png", size: "80x80") %>
+              <% end %>
+            </div>
+            <div class="col-md-8">
+              <div style="background:white;"><span class="badge"></span> 
+              <b style="color:#286090"><%= link_to doctor.name.capitalize, doctor %></b><br />
+              <%= "#{doctor.experience} years of experience"%><br />
+              <%= "Working at #{doctor.hospital_name}" %><br />
+              </div>
+            </div>
+          </div>
+        </div>
+	    </div>
+    <% end %>
+  </div>
+</div>
 
 <script type="text/javascript">
-  
-
   $(document).ready(function(){ 
-    $("#state").click(function(){
 
+    $("#state").click(function(){
         var state1 = $('#state').val();
         $.ajax({
           method: "GET",
           url: "/cities",
           data: { state:state1 }
         })
-
         .done(function( cities ) {
           var cityElm=$("#home-state-cities")
           var optValues=""
@@ -85,12 +83,10 @@
           for (i = 0; i < cities.length; i++) { 
             optValues += "<option>" + cities[i] + "</option>";
           }
-          cityElm.html("<select name=city>" + optValues+ "</select>")  
+          cityElm.html("<select name=city class=form-control>" + optValues+ "</select>")  
         });
       } 
     );
-
-
   });
     
 </script>
