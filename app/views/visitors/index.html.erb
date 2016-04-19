@@ -7,12 +7,11 @@
 	<h3><%#= "Welcome #{current_patient.name.capitalize}" %></h3>
 <% end %>
 <% if (!doctor_signed_in?) %>
-<div class="row">
 	<div class="container">
   	<h2>Doctor Categories</h2>
     <br>
   	<% DoctorCategory.all.each do |doctor_category| %>
-      <div class="col-md-3">
+      <div class="col-sm-3 col-md-2" style="margin-bottom:4%">
         <div>
           <% if doctor_category.avatar.present? %>
             <%= image_tag(doctor_category.avatar.url(:medium),size: "130x100") %>
@@ -27,7 +26,6 @@
       </div>
   	<% end %>   
   </div>
-</div>
 <% else %>
 
 <%= render partial: "/doctors/details"%>
