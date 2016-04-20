@@ -8,11 +8,7 @@ class ApplicationController < ActionController::Base
   private
 
     def resolve_layout
-      if action_name == "new"
-        "login"
-      else
-        "application"
-      end
+      action_name == "new" ? "login" : "application"
     end
 
 
