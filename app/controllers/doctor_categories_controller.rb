@@ -1,7 +1,9 @@
 class DoctorCategoriesController < ApplicationController
   before_action :set_doctor_category, only: [:show, :edit, :update, :destroy]
   before_action :set_doctors, only: [:show]
+  layout :resolve_layout
   include EntityHelper
+
 
   def index
     @doctor_categories = DoctorCategory.all
@@ -40,6 +42,12 @@ class DoctorCategoriesController < ApplicationController
 
     def set_doctors
        @doctors =  @doctor_category.doctors.active
+    end
+
+    def resolve_layout
+      if action_name == "show"
+        "doctor_category"
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
