@@ -17,7 +17,7 @@
 
           <div class="form-group">
             <div class="field">
-              <%= submit_tag("Search", class: "btn btn-success") %>
+              <%= submit_tag("Search", class: "btn btn-info") %>
             </div>
           </div>
         <% end %> 
@@ -25,7 +25,7 @@
     </div>
     <div class="col-md-2 col-md-offset-3">
       <div class="dropdown">
-        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Doctor Category
+        <button class="btn btn-info" type="button" data-toggle="dropdown">Doctor Category
         <span class="caret"></span></button>
          <ul class="dropdown-menu">
             <% DoctorCategory.all.each do |dc|%>
