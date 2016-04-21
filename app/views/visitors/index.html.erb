@@ -14,9 +14,9 @@
       <div class="col-sm-3 col-md-2" style="margin-bottom:4%">
         <div>
           <% if doctor_category.avatar.present? %>
-            <%= image_tag(doctor_category.avatar.url(:medium),size: "130x100") %>
+            <%= link_to image_tag(doctor_category.avatar.url(:medium),size: "130x100"), doctor_category %>
           <% else %>
-            <%= image_tag("missing_doctor_category_avatar.png", size: "130x100") %>
+            <%= link_to image_tag("missing_doctor_category_avatar.png", size: "130x100"), doctor_category %>
           <% end %>
         </div>
   		  <div>
