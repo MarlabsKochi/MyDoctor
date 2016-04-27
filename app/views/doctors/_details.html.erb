@@ -1,50 +1,40 @@
-
 <div class="container">
   <div class="jumbotron">
     <div class="row">
-      <div class="col-sm-4">
-        <h1><%= link_to @doctor.name.capitalize %></h1>
-      </div>
-      <% if doctor_signed_in? && current_doctor == @doctor %>
-        <div class="col-sm-4 col-sm-offset-4">
-          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Manage Appointment</button>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-3" id="doctor-image">
+            <% if @doctor.avatar.present? %>
+              <%= image_tag @doctor.avatar.url(:small) %>
+            <% else %>
+              <%= image_tag("missing_doctor_avatar.png",size: "100x100") %>
+            <% end %>
+          </div>
+           <div class="col-sm-9"> 
+            <p><%= @doctor.name.capitalize %></p>
+            <small><%= "#{@doctor.doctor_category.name}"%></small>
+            <br>
+            <small><%= "#{@doctor.experience} years of experience" %></small>
+            <small><%= "Working at #{@doctor.hospital_name}" %></small>
+            <small><%= "#{@doctor.about_me}" %></small>
+          </div>
+          <div class="col-sm-4" id="image-loader" style="padding-top: 5%;padding-left: 9%;display:none;"><%=image_tag 'ajax-loader.gif'%>
+          </div>
         </div>
-      <% end %>
-    </div>
-    <div class="row">
-      <div class="col-sm-4" id="doctor-image">
-        <% if @doctor.avatar.present? %>
-          <%= image_tag @doctor.avatar.url(:small) %>
-        <% else %>
-          <%= image_tag("missing_doctor_avatar.png",size: "100x100") %>
+        <% if doctor_signed_in? && current_doctor == @doctor %>
+          <%= form_for(@doctor,  html: { multipart: true, id:'form-avatar' }) do |f| %>
+            <%= f.file_field :avatar, id: "doctor-avatar", style: "display:none" %> 
+          <% end %>
         <% end %>
       </div>
-      <div class="col-sm-4" id="image-loader" style="padding-top: 5%;padding-left: 9%;display:none;"><%=image_tag 'ajax-loader.gif'%>
+      <div class="col-sm-6">
+        <%=render :partial => "doctors/manage_appointment"%>
       </div>
-    </div>
-  <% if doctor_signed_in? && current_doctor == @doctor %>
-    <%= form_for(@doctor,  html: { multipart: true, id:'form-avatar' }) do |f| %>
-      <%= f.file_field :avatar, id: "doctor-avatar", style: "display:none" %> 
-    <% end %>
-  <% end %>
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>About</h3>
-      <p><%= "#{@doctor.experience} years of experience" %></p>
-      <p><%= "Working at #{@doctor.hospital_name}" %></p>
-      <p><%= "#{@doctor.about_me}" %></p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Clinic</h3>
-      <p><%= "#{@doctor.hospital_name.capitalize}" %></p>
-      <p><%= "#{@doctor.hospital_address}" %></p>
-      <p><%= "#{@doctor.hospital_landmark}" %></p>
-      <p><%= "#{@doctor.hospital_phone}" %></p>
     </div>
   </div>
 </div>
 
-<%=render :partial => "doctors/manage_appointment"%>
+
 
 <script type="text/javascript">
   var checkDoc = "<%=doctor_signed_in?%>" 

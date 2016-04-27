@@ -21,3 +21,44 @@
  	  <%=button_tag "Add New", class:"btn btn-xs btn-primary", id: 'sub_new_slots' %>
  	</div>
 </div>
+
+<script>
+  $(function(){
+    $('#from').combodate({
+        firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
+        minuteStep: 1
+    });
+
+    $('#to').combodate({
+        firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
+        minuteStep: 1
+    }); 
+
+    $('#duration').combodate({
+      firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
+      minuteStep: 1
+    })
+
+    $('#sub_new_slots').click(function(){
+      var weekArr = []
+      $('#weeksField input:checked').each(function() {
+        weekArr.push($(this).val());
+      });
+
+      $.ajax({
+        method: "post",
+        url: "/time_slots",
+        data: { time_slot: {doctor_id:"<%=@doctor.id%>",
+          from: $("#from").val(),
+          to: $('#to').val(),
+          duration: $('#duration').val()},
+          week_days: weekArr }
+      })
+        .done(function( data ) {
+          $("#doctor-time-slots").html(data)
+        });
+    })
+
+  });
+
+</script>
