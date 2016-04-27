@@ -12,7 +12,7 @@
           </div>
            <div class="col-sm-9"> 
             <p><%= @doctor.name.capitalize %></p>
-            <small><%= "#{@doctor.doctor_category.name}"%></small>
+            <small><%= "#{@doctor.doctor_category.name}" if @doctor.doctor_category %></small>
             <br>
             <small><%= "#{@doctor.experience} years of experience" %></small>
             <small><%= "Working at #{@doctor.hospital_name}" %></small>
