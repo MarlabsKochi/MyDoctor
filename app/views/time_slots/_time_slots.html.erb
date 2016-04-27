@@ -1,26 +1,33 @@
-<%if @message %>
-  <p class="alert alert-warning"><%=@message%></p>
-<% end %>
-<h4 class="modal-title">Your Time Slots(<%=@time_slots.count%>)</h4>
-<table class="table table-striped">
-  <thead>
-    <th>From</th>
-    <th>To</th>
-    <th>Duration</th>
-    <th>Week Days</th>
-    <th>Delete</th>
-  </thead>
-  <%@time_slots.each do |ts|%>
-    <tr>
-      <td><%=ts.from%></td>
-      <td><%=ts.to%></td>
-      <td><%=ts.duration%></td>
-      <td><%=ts.retrive_days%></td>
-      <td><%=image_tag'delete', {size: "16x10", :id => 'del-time-slot', 
-             :slot_id => "#{ts.id}", :class => 'delete'}%></td>
-    </tr>
-  <%end%>
-</table>
+<div style="color:black;" id="doctor-time-slots">
+  <%if @message %>
+    <p class="alert alert-warning"><%=@message%></p>
+  <% end %>
+  <h4 class="modal-title">Available Timings(<%=@time_slots.count%>)</h4>
+  <table class="table table-striped">
+    <thead>
+      <th>From</th>
+      <th>To</th>
+      <th>Duration</th>
+      <th>Week Days</th>
+      <% if doctor_signed_in? %>
+        <th>Delete</th>
+      <% end %>
+    </thead>
+    <%@time_slots.each do |ts|%>
+      <tr>
+        <td><%=ts.from%></td>
+        <td><%=ts.to%></td>
+        <td><%=ts.duration%></td>
+        <td><%=ts.retrive_days%></td>
+        <% if doctor_signed_in? %>
+          <td><%=image_tag'delete', {size: "16x10", :id => 'del-time-slot', 
+                 :slot_id => "#{ts.id}", :class => 'delete'}%>
+          </td>
+        <% end %>
+      </tr>
+    <%end%>
+  </table>
+</div>
 
 <script type="text/javascript">
   $('.delete').click(function(){
