@@ -6,7 +6,7 @@
   <br>
   <%= render partial: 'time_slots/form' %>
 <% else %>
-  <%= button_tag "Create Appointment", class: "btn btn-info btn-xs", style:"float:right" %>
+  <%= link_to "Create Appointment", new_appointment_path , class: "btn btn-info btn-xs", style:"float:right" %>
   <br>
   <%= render partial: "time_slots/time_slots" %>
 <% end %> 

@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/Nerian/bootstrap-datepicker-rails.git
+  revision: 4cc73391f45f1df4138a3421b8cb9ebedb36dc6f
+  specs:
+    bootstrap-datepicker-rails (1.6.0.1)
+      railties (>= 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -77,6 +84,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
+    combined_time_select (1.0.1)
     concurrent-ruby (1.0.0)
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
@@ -298,12 +306,14 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors
+  bootstrap-datepicker-rails!
   bootstrap-sass
   byebug
   capybara
   city-state
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
+  combined_time_select
   database_cleaner
   devise
   factory_girl_rails

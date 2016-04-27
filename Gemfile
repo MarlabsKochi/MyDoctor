@@ -13,6 +13,9 @@ gem 'rails_admin'
 gem 'paperclip'
 gem 'city-state'
 gem 'heroku'
+gem "combined_time_select"
+gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
+                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 
 
 group :development, :test do
