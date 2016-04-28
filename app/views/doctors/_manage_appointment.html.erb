@@ -1,6 +1,8 @@
-
+<html>
+<body>
 <% if doctor_signed_in? %>
-  <p>Manage Your Appointments</p>
+<button class="accordion">Manage Your Appointments</button>
+<div class="panel">
   <br>
   <%= render partial: "time_slots/time_slots" %>
   <br>
@@ -10,3 +12,21 @@
   <br>
   <%= render partial: "time_slots/time_slots" %>
 <% end %> 
+</div>
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].onclick = function(){
+        this.classList.toggle("active");
+        this.nextElementSibling.classList.toggle("show");
+  }
+}
+</script>
+
+</body>
+</html>
+
+
