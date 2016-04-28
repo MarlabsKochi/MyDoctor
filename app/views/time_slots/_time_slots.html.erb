@@ -2,7 +2,8 @@
   <%if @message %>
     <p class="alert alert-warning"><%=@message%></p>
   <% end %>
-  <h4 class="modal-title">Available Timings(<%=@time_slots.count%>)</h4>
+  <button class="accordion">Available Timings(<%=@time_slots.count%>)</button>
+  <div class="panel" id="scroll">
   <table class="table table-striped">
     <thead>
       <th>From</th>
@@ -27,6 +28,7 @@
       </tr>
     <%end%>
   </table>
+  </div>
 </div>
 
 <script type="text/javascript">
@@ -40,4 +42,12 @@
         $("#doctor-time-slots").html(data)
       });
   })
+  var acc = $(".accordion");
+  var i;
+  for (i = 0; i < acc.length; i++){
+      acc[i].onclick = function(){
+      this.classList.toggle("active");
+      this.nextElementSibling.classList.toggle("show");
+    }
+}
 </script>
