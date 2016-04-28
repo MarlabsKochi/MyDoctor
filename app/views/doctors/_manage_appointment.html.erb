@@ -5,8 +5,8 @@
   <%= render partial: "time_slots/time_slots" %>
   <br>
   <%= render partial: 'time_slots/form' %>
-<% else %>
-  <%= link_to "Create Appointment", new_appointment_path , class: "btn btn-info btn-xs", style:"float:right" %>
+<% elsif patient_signed_in? %>
+  <%= link_to "Create Appointment", "/appointments/new?doctor_id=#{params[:id]}" , doctor_id: params[:id], class: "btn btn-info btn-xs", style:"float:right" %>
   <br>
   <%= render partial: "time_slots/time_slots" %>
 <% end %> 
