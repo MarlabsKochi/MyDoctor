@@ -22,7 +22,12 @@ class TimeSlot < ActiveRecord::Base
 
   def ensure_no_other_record
   	time_slot = TimeSlot.where(doctor_id: self.doctor_id)
-  	              .where("time_slots.from = ? or time_slots.to = ?",  self.from, self.to)
+  	              .where("(time_slots.from < '#{self.from}' 
+                    and '#{self.from}' < time_slots.to) 
+                    or (time_slots.from < '#{self.to}' 
+                    and '#{self.to}' < time_slots.to)
+                    or (time_slots.from > '#{self.from}' 
+                    and time_slots.to < '#{self.to}')")
   	time_slot.blank? ? true : false
   end
 end
