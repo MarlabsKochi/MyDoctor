@@ -1,0 +1,46 @@
+<%= form_for @appointment do |f| %>
+
+  <% if @appointment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
+
+      <ul>
+      <% @appointment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.text_field :date, class:'datepicker' %>
+  </div>
+
+  <div class="field">
+  	<%= f.label :time %><br>
+	<%= f.time_select :time,
+	  :combined => true,
+	  :default => Time.now.change(:hour => 11, :min => 30),
+	  :minute_interval => 15,
+	  :time_separator => "",
+	  :start_hour => 10,
+	  :start_minute => 30,
+	  :end_hour => 14,
+	  :end_minute => 30
+	%>
+  </div><br>
+  <%= hidden_field_tag 'doctor_id', params[:doctor_id] %>
+
+  <div class="actions">
+    <%= f.submit "Create", :class => 'button right' %>
+  </div>
+
+<%end%>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>

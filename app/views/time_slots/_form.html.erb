@@ -1,19 +1,30 @@
-<div class='row'>
+<h5><b>Choose your Time Slot</b></h5>
+<div class="row">
   <div class="col-sm-1">From:</div>
-  <div class="col-sm-4" style="width:27%;"><input type="text" id="from" data-format="HH:mm" data-template="HH : mm" name="datetime"></div>
-  <div class="col-sm-1">To:</div>
-  <div class="col-md-4" style="width:27%;margin-left:-3%;"><input type="text" id="to" data-format="HH:mm" data-template="HH : mm" name="datetime"></div>
-  <div class="col-sm-1" style="width:10%;">Duration:</div>
-  <div class="col-sm-1"><input type="text" id="duration" data-format="mm" data-template="mm" name="datetime"></div>
-</div>
+  <div class="col-sm-2" style="width:31%;">
+    <input type="text" id="from" data-format="HH:mm" data-template="HH : mm" name="datetime">
+  </div>
 
+  <div class="col-sm-1">To:</div>
+  <div class="col-md-3" style="width:31%;margin-left:-3.9%;">
+    <input type="text" id="to" data-format="HH:mm" data-template="HH : mm" name="datetime">
+  </div>
+  </div></br>
+<div class="row">
+  <div class="col-sm-1" style="width:12%;margin-left:0%">Duration:</div>
+  <div class="col-sm-3">
+    <input type="text" id="duration" data-format="mm" data-template="mm" name="datetime">
+  </div>  
+
+  
 <div class='row' id="weeksField">
-	<div class="col-md-11">
+	<div class="col-md-6">
     <% ts_week_days.keys.each do |w| %>
       <%=ts_week_days[w]%>
     	<%=check_box_tag 'week_days[]', w%>
     <%end%>
 	</div>
+</div>
 </div>
 
 <div class='row'>
