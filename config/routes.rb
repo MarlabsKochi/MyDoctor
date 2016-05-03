@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   resources :users
   resources :doctor_categories
   resources :time_slots
-  resources :appointments
+  resources :appointments do
+    get 'time_selector'
+  end
 
   ## Mapped Routes
   get 'cities/', to: 'doctors#cities'

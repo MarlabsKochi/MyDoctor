@@ -1,6 +1,12 @@
 class AppointmentsController < ApplicationController
-  def index
 
+  def time_selector
+    binding.pry
+    date = params[:date].to_date
+    Date.today.strftime("%A")
+  end
+
+  def index
   end
 
   def show
@@ -33,6 +39,7 @@ class AppointmentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
       params[:appointment].parse_time_select! :time
+      binding.pry
       params[:appointment][:date].to_date
       params[:appointment][:doctor_id] = params[:doctor_id]
       params.require(:appointment).permit(:date, :time, :doctor_id, :patient_id)
