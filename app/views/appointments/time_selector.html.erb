@@ -1,0 +1,15 @@
+<%= form_for @appointment do |f| %>
+  <div id="appointment-time">
+  	<%= f.label :time %><br>
+	<%= f.time_select :time,
+	  :combined => true,
+	  :default => Time.now.change(:hour => 12, :min => 30),
+	  :minute_interval => 30,
+	  :time_separator => "",
+	  :start_hour => 12,
+	  :start_minute => 30,
+	  :end_hour => 16,
+	  :end_minute => 30
+	%>
+  </div><br>
+  <%end%>

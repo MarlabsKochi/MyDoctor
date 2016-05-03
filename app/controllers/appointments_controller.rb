@@ -1,9 +1,39 @@
 class AppointmentsController < ApplicationController
 
   def time_selector
-    binding.pry
-    date = params[:date].to_date
-    Date.today.strftime("%A")
+    @appointment = Appointment.new
+    day_number = get_day_number(get_day_type)
+    time_slot = get_doctor_time_slot
+    app_available = time_slot.week_days.include?(day_number)
+    @schedule = app_available.blank? ? time_slot : false
+    #binding.pry
+  end
+
+  def get_day_type
+    params[:date].to_date.strftime("%A")
+  end
+
+  def get_day_number(ts)
+    case ts
+    when 'Sunday'
+      1
+    when 'Monday'
+      2
+    when 'Tuesday'
+      3
+    when 'Wednesday'
+      4
+    when 'Thursday'
+      5
+    when 'Friday'
+      6
+    when 'Saturday'
+      7
+    end
+  end
+
+  def get_doctor_time_slot
+    Doctor.find(params[:doctor_id]).time_slots.first
   end
 
   def index

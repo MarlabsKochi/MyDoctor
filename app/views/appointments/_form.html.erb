@@ -17,19 +17,7 @@
     <%= f.text_field :date, class:'datepickerfield' %>
   </div>
 
-  <div class="dropdown" id="appointment-time">
-  	<%= f.label :time %><br>
-	<%= f.time_select :time,
-	  :combined => true,
-	  :default => Time.now.change(:hour => 10, :min => 30),
-	  :minute_interval => 15,
-	  :time_separator => "",
-	  :start_hour => 10,
-	  :start_minute => 30,
-	  :end_hour => 14,
-	  :end_minute => 30
-	%>
-  </div><br>
+  <div id="appointment-time"></div>
 
   <%= hidden_field_tag 'doctor_id', params[:doctor_id] %>
 
@@ -39,7 +27,6 @@
 
 <%end%>
 
-
 <script>
   $(document).ready(function () {
     $('.datepickerfield').datepicker({format: "dd/mm/yyyy"}).on("change", function(e) {
@@ -48,10 +35,12 @@
     	$.ajax({
           method: "get",
           url: "appointments/time_selector",
-          data: {date: appointment_date}     
+          data: { date: appointment_date,
+                  doctor_id: "<%=params[:doctor_id]%>"
+                }     
       	})
         .done(function( data ) {
-          $("#appointment_date").html(data)
+          $("#appointment-time").html(data)
         });
     });
   });
