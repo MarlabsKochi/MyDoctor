@@ -24,7 +24,11 @@
   <%= hidden_field_tag 'doctor_id', params[:doctor_id] %>
 
   <div class="actions">
-    <%= f.submit "Create", :class => 'button right' %>
+    <%= f.submit "Create", id: "submit_button", :class => 'button right' %>
+  </div>
+
+  <div class="actions">
+    <%= link_to "Back", :back, :class => 'button left' %>
   </div>
 
 <%end%>
@@ -33,7 +37,7 @@
   $(document).ready(function () {
     $('.datepickerfield').datepicker({format: "dd/mm/yyyy", autoclose : true}).on("changeDate", function(e) {
     	appointment_date = ($('#appointment_date').val());
-      $('#loading-image').show();
+        $('#loading-image').show();
     	$.ajax({
           method: "get",
           url: "appointments/time_selector",
@@ -43,6 +47,12 @@
       	})
         .done(function( data ) {
           $('#loading-image').hide();
+          if (data.includes("No Appointment")){
+          	$('#submit_button').prop('disabled', true);
+          }
+          else {
+          	$('#submit_button').prop('disabled', false);
+      	  }
           $("#appointment-time").html(data)
         });
     });

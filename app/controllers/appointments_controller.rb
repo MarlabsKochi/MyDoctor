@@ -33,13 +33,13 @@ class AppointmentsController < ApplicationController
   end
 
   def get_doctor_time_slot
-    Doctor.find(params[:doctor_id]).time_slots
+    Doctor.find(params[:doctor_id]).time_slots.first
   end
 
   def check_appointment_available(ts,dn)
-    binding.pry
-    Doctor.find(1).time_slots.where(week_days:2)
-    ts.first.week_days.include?("#{dn}")
+    #binding.pry
+    #Doctor.find(1).time_slots.where(week_days:2)
+    ts.week_days.include?("#{dn}")
   end
 
   def index
