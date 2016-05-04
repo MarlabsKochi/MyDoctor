@@ -54,13 +54,21 @@
           	$('#submit_button').prop('disabled', false);
       	  }
       	  $("#appointment-time").html(data)
-          var booked_slots = $.makeArray( $('#booked_slots').val() );
-          $.each(booked_slots, function (index, value) {
-  			$("select option[value='"+ value + "']").attr('disabled', true );
-  		  });
+          //var booked_slots = $.makeArray( $('#booked_slots').val() );
+          //$.each(booked_slots, function (index, value) {
+  			  //  $("select option[value='"+ value + "']").attr('disabled', true );
+  		    //});
           //$("select option[value='12:00:00']").attr('disabled', true );
           //$("select option[value='13:00:00']").attr('disabled', true );
         });
     });
   });
+
+  $(document).ajaxComplete(function(){
+    bs = $('#booked_slots').val();
+    var booked_slots = bs.split(',');
+    $.each(booked_slots, function (index, value) {
+      $("select option[value='"+ value + "']").attr('disabled', true );
+    });
+   });
 </script>

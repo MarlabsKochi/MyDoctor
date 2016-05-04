@@ -44,8 +44,10 @@ class AppointmentsController < ApplicationController
   def get_booked_timings
     booked_timings = Appointment.where(doctor_id:params[:doctor_id], date:params[:date].to_date)
     boo = []
-    booked_timings.each do |booked_timing|
-      boo.push(booked_timing.time.strftime("%I:%M:%S"))
+    if booked_timings.present?
+      booked_timings.each do |booked_timing|
+        boo.push(booked_timing.time.strftime("%I:%M:%S"))
+      end
     end
     boo.join(',')
   end

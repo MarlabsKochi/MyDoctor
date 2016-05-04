@@ -1,4 +1,3 @@
-<div class="field">
 <% if @appointment_available %>
   <%= fields_for @appointment do |f| %>
   	<%= f.label :time %><br>
@@ -15,7 +14,18 @@
 	%>
   <%end%>
   <%= hidden_field_tag 'booked_slots', @booked_slots %>
-</div>
 <%else%>
   <p id="errors"><%= @scheduler %></p>
 <%end%>
+
+<script>
+  $(document).ajaxComplete(function(){
+    bs = $('#booked_slots').val();
+    if (bs.trim()) {
+      var booked_slots = bs.split(',');
+      $.each(booked_slots, function (index, value) {
+        $("select option[value='"+ value + "']").attr('disabled', true );
+      });
+	}
+   });
+</script>
