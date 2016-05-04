@@ -17,41 +17,43 @@
     <%= f.text_field :date, class:'datepickerfield' %>
   </div>
 
-  <div class="dropdown" id="appointment-time">
-  	<%= f.label :time %><br>
-	<%= f.time_select :time,
-	  :combined => true,
-	  :default => Time.now.change(:hour => 10, :min => 30),
-	  :minute_interval => 15,
-	  :time_separator => "",
-	  :start_hour => 10,
-	  :start_minute => 30,
-	  :end_hour => 14,
-	  :end_minute => 30
-	%>
-  </div><br>
+  <div id="appointment-time"></div>
+
+  <div id="loading-image" style="display:none;"><%=image_tag 'ajax-loader.gif'%></div>
 
   <%= hidden_field_tag 'doctor_id', params[:doctor_id] %>
 
   <div class="actions">
-    <%= f.submit "Create", :class => 'button right' %>
+    <%= f.submit "Create", id: "submit_button", :class => 'button right' %>
+  </div>
+
+  <div class="actions">
+    <%= link_to "Back", :back, :class => 'button left' %>
   </div>
 
 <%end%>
 
-
 <script>
   $(document).ready(function () {
-    $('.datepickerfield').datepicker({format: "dd/mm/yyyy"}).on("change", function(e) {
+    $('.datepickerfield').datepicker({format: "dd/mm/yyyy", autoclose : true}).on("changeDate", function(e) {
     	appointment_date = ($('#appointment_date').val());
-    	$(this).datepicker('hide');
+        $('#loading-image').show();
     	$.ajax({
           method: "get",
           url: "appointments/time_selector",
-          data: {date: appointment_date}     
+          data: { date: appointment_date,
+                  doctor_id: "<%=params[:doctor_id]%>"
+                }     
       	})
         .done(function( data ) {
-          $("#appointment_date").html(data)
+          $('#loading-image').hide();
+          if (data.includes("No Appointment")){
+          	$('#submit_button').prop('disabled', true);
+          }
+          else {
+          	$('#submit_button').prop('disabled', false);
+      	  }
+          $("#appointment-time").html(data)
         });
     });
   });

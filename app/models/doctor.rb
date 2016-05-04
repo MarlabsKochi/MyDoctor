@@ -7,6 +7,7 @@ class Doctor < ActiveRecord::Base
   
   # Associations         
   belongs_to :doctor_category
+  has_many :appointments
   has_many :documents, :dependent => :destroy
   accepts_nested_attributes_for :documents
   has_many :time_slots
