@@ -7,6 +7,7 @@ class AppointmentsController < ApplicationController
     time_slot = get_doctor_time_slot
     @appointment_available = check_appointment_available(time_slot,day_number)
     @scheduler = @appointment_available ? time_slot : "No Appointment available for this date"
+    @booked_slots = get_booked_timings
   end
 
   def get_day_type
@@ -38,6 +39,15 @@ class AppointmentsController < ApplicationController
 
   def check_appointment_available(ts,dn)
     ts.week_days.include?("#{dn}")
+  end
+
+  def get_booked_timings
+    booked_timings = Appointment.where(doctor_id:params[:doctor_id], date:params[:date].to_date)
+    boo = []
+    booked_timings.each do |booked_timing|
+      boo.push(booked_timing.time.strftime("%I:%M:%S"))
+    end
+    boo.join(',')
   end
 
   def index

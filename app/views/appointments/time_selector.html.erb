@@ -14,6 +14,7 @@
 	  :end_minute => (@scheduler.to.to_time.min.to_i - @scheduler.duration.to_i)
 	%>
   <%end%>
+  <%= hidden_field_tag 'booked_slots', @booked_slots %>
 </div>
 <%else%>
   <p id="errors"><%= @scheduler %></p>
