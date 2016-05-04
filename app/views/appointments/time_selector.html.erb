@@ -1,15 +1,17 @@
-<%= form_for @appointment do |f| %>
-  <div id="appointment-time">
+<% if @appointment_available %>
+  <%= form_for @appointment do |f| %>
   	<%= f.label :time %><br>
 	<%= f.time_select :time,
 	  :combined => true,
-	  :default => Time.now.change(:hour => 12, :min => 30),
-	  :minute_interval => 30,
+	  #:default => Time.now.change(:hour => 12, :min => 30),
+	  :minute_interval => @scheduler.duration.to_i,
 	  :time_separator => "",
-	  :start_hour => 12,
-	  :start_minute => 30,
-	  :end_hour => 16,
-	  :end_minute => 30
+	  :start_hour => @scheduler.from.to_time.hour.to_i,
+	  :start_minute => @scheduler.from.to_time.min.to_i,
+	  :end_hour => @scheduler.to.to_time.hour.to_i,
+	  :end_minute => @scheduler.to.to_time.min.to_i
 	%>
-  </div><br>
   <%end%>
+<%else%>
+  <%= @scheduler %>
+<%end%>

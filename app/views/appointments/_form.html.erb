@@ -19,6 +19,8 @@
 
   <div id="appointment-time"></div>
 
+  <div id="loading-image" style="display:none;"><%=image_tag 'ajax-loader.gif'%></div>
+
   <%= hidden_field_tag 'doctor_id', params[:doctor_id] %>
 
   <div class="actions">
@@ -29,9 +31,9 @@
 
 <script>
   $(document).ready(function () {
-    $('.datepickerfield').datepicker({format: "dd/mm/yyyy"}).on("change", function(e) {
+    $('.datepickerfield').datepicker({format: "dd/mm/yyyy", autoclose : true}).on("changeDate", function(e) {
     	appointment_date = ($('#appointment_date').val());
-    	$(this).datepicker('hide');
+      $('#loading-image').show();
     	$.ajax({
           method: "get",
           url: "appointments/time_selector",
@@ -40,6 +42,7 @@
                 }     
       	})
         .done(function( data ) {
+          $('#loading-image').hide();
           $("#appointment-time").html(data)
         });
     });

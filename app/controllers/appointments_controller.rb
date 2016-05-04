@@ -1,19 +1,19 @@
 class AppointmentsController < ApplicationController
 
   def time_selector
+    @scheduler = []
     @appointment = Appointment.new
     day_number = get_day_number(get_day_type)
     time_slot = get_doctor_time_slot
-    app_available = time_slot.week_days.include?(day_number)
-    @schedule = app_available.blank? ? time_slot : false
-    #binding.pry
+    @appointment_available = check_appointment_available(time_slot,day_number)
+    @scheduler = @appointment_available ? time_slot : "No Appointment Available for the selected date"
   end
 
   def get_day_type
     params[:date].to_date.strftime("%A")
   end
 
-  def get_day_number(ts)
+  def get_day_number ts
     case ts
     when 'Sunday'
       1
@@ -33,7 +33,13 @@ class AppointmentsController < ApplicationController
   end
 
   def get_doctor_time_slot
-    Doctor.find(params[:doctor_id]).time_slots.first
+    Doctor.find(params[:doctor_id]).time_slots
+  end
+
+  def check_appointment_available(ts,dn)
+    binding.pry
+    Doctor.find(1).time_slots.where(week_days:2)
+    ts.first.week_days.include?("#{dn}")
   end
 
   def index
@@ -69,7 +75,6 @@ class AppointmentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
       params[:appointment].parse_time_select! :time
-      binding.pry
       params[:appointment][:date].to_date
       params[:appointment][:doctor_id] = params[:doctor_id]
       params.require(:appointment).permit(:date, :time, :doctor_id, :patient_id)
