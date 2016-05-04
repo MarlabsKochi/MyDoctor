@@ -15,7 +15,7 @@
   <div class="field">
     <%= f.label :date %><br>
     <%= f.text_field :date, class:'datepickerfield' %>
-  </div>
+  </div><br><br>
 
   <div id="appointment-time"></div>
 
@@ -54,6 +54,9 @@
           	$('#submit_button').prop('disabled', false);
       	  }
           $("#appointment-time").html(data)
+          
+          $("select option[value='12:00:00']").attr('disabled', true );
+          $("select option[value='13:00:00']").attr('disabled', true );
         });
     });
   });

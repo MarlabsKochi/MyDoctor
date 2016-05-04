@@ -6,7 +6,7 @@ class AppointmentsController < ApplicationController
     day_number = get_day_number(get_day_type)
     time_slot = get_doctor_time_slot
     @appointment_available = check_appointment_available(time_slot,day_number)
-    @scheduler = @appointment_available ? time_slot : "No Appointment Available for the selected date"
+    @scheduler = @appointment_available ? time_slot : "No Appointment available for this date"
   end
 
   def get_day_type
@@ -37,8 +37,6 @@ class AppointmentsController < ApplicationController
   end
 
   def check_appointment_available(ts,dn)
-    #binding.pry
-    #Doctor.find(1).time_slots.where(week_days:2)
     ts.week_days.include?("#{dn}")
   end
 

@@ -1,3 +1,4 @@
+<div class="field">
 <% if @appointment_available %>
   <%= fields_for @appointment do |f| %>
   	<%= f.label :time %><br>
@@ -13,6 +14,7 @@
 	  :end_minute => (@scheduler.to.to_time.min.to_i - @scheduler.duration.to_i)
 	%>
   <%end%>
+</div>
 <%else%>
-  <%= @scheduler %>
+  <p id="errors"><%= @scheduler %></p>
 <%end%>
