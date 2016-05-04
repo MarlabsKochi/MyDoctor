@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     def configure_permitted_parameters
     	if params.has_key?("doctor")
         devise_parameter_sanitizer.for(:sign_up) << :name << :age << :phone_number << :doctor_category_id
-      else #params.has_key?("patients")
+      else params.has_key?("patients")
   	    devise_parameter_sanitizer.for(:sign_up) << :name << :age << :phone_number
       end
     end
