@@ -1,8 +1,8 @@
 class Appointment < ActiveRecord::Base
   
   # Associations
-  belongs_to :Patient
-  belongs_to :Doctor
+  belongs_to :patient
+  belongs_to :doctor
 
   # Validations
   validates :doctor_id, :patient_id, :date, presence: true
