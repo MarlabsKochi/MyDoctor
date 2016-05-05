@@ -13,6 +13,19 @@
 	  :end_minute => (@scheduler.to.to_time.min.to_i - @scheduler.duration.to_i)
 	%>
   <%end%>
+  <%= hidden_field_tag 'booked_slots', @booked_slots %>
 <%else%>
-  <%= @scheduler %>
+  <p id="errors"><%= @scheduler %></p>
 <%end%>
+
+<script>
+  $(document).ajaxComplete(function(){
+    bs = $('#booked_slots').val();
+    if (bs.trim()) {
+      var booked_slots = bs.split(',');
+      $.each(booked_slots, function (index, value) {
+        $("select option[value='"+ value + "']").attr('disabled', true );
+      });
+	}
+   });
+</script>
