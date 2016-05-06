@@ -14,33 +14,61 @@
 
   <div class="field">
     <%= f.label :date %><br>
-    <%= f.text_field :date, class:'datepicker' %>
-  </div>
+    <%= f.text_field :date, class:'datepickerfield' %>
+  </div><br><br>
 
-  <div class="field">
-  	<%= f.label :time %><br>
-	<%= f.time_select :time,
-	  :combined => true,
-	  :default => Time.now.change(:hour => 11, :min => 30),
-	  :minute_interval => 15,
-	  :time_separator => "",
-	  :start_hour => 10,
-	  :start_minute => 30,
-	  :end_hour => 14,
-	  :end_minute => 30
-	%>
-  </div><br>
+  <div id="loading-image" style="display:none;"><%=image_tag 'ajax-loader.gif'%></div>
+
+  <div id="appointment-time"></div>
+
   <%= hidden_field_tag 'doctor_id', params[:doctor_id] %>
 
   <div class="actions">
-    <%= f.submit "Create", :class => 'button right' %>
+    <%= f.submit "Create", id: "submit_button", :class => 'button right' %>
+  </div>
+
+  <div class="actions">
+    <%= link_to "Back", :back, :class => 'button left' %>
   </div>
 
 <%end%>
 
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('.datepicker').datepicker();
+<script>
+  $(document).ready(function () {
+    $('.datepickerfield').datepicker({format: "dd/mm/yyyy", autoclose : true}).on("changeDate", function(e) {
+    	appointment_date = ($('#appointment_date').val());
+        $('#loading-image').show();
+    	$.ajax({
+          method: "get",
+          url: "appointments/time_selector",
+          data: { date: appointment_date,
+                  doctor_id: "<%=params[:doctor_id]%>"
+                }     
+      	})
+        .done(function( data ) {
+          $('#loading-image').hide();
+          if (data.includes("No Appointment")){
+          	$('#submit_button').prop('disabled', true);
+          }
+          else {
+          	$('#submit_button').prop('disabled', false);
+      	  }
+      	  $("#appointment-time").html(data)
+          //var booked_slots = $.makeArray( $('#booked_slots').val() );
+          //$.each(booked_slots, function (index, value) {
+  			  //  $("select option[value='"+ value + "']").attr('disabled', true );
+  		    //});
+          //$("select option[value='12:00:00']").attr('disabled', true );
+          //$("select option[value='13:00:00']").attr('disabled', true );
+        });
+    });
   });
+
+  $(document).ajaxComplete(function(){
+    bs = $('#booked_slots').val();
+    var booked_slots = bs.split(',');
+    $.each(booked_slots, function (index, value) {
+      $("select option[value='"+ value + "']").attr('disabled', true );
+    });
+   });
 </script>

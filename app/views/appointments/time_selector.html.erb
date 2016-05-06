@@ -1,0 +1,31 @@
+<% if @appointment_available %>
+  <%= fields_for @appointment do |f| %>
+  	<%= f.label :time %><br>
+	<%= f.time_select :time,
+	  :combined => true,
+	  :ampm => true,
+	  #:default => Time.now.change(:hour => 12, :min => 30),
+	  :minute_interval => @scheduler.duration.to_i,
+	  :time_separator => "",
+	  :start_hour => @scheduler.from.to_time.hour.to_i,
+	  :start_minute => @scheduler.from.to_time.min.to_i,
+	  :end_hour => @scheduler.to.to_time.hour.to_i,
+	  :end_minute => (@scheduler.to.to_time.min.to_i - @scheduler.duration.to_i)
+	%>
+  <%end%>
+  <%= hidden_field_tag 'booked_slots', @booked_slots %>
+<%else%>
+  <p id="errors"><%= @scheduler %></p>
+<%end%>
+
+<script>
+  $(document).ajaxComplete(function(){
+    bs = $('#booked_slots').val();
+    if (bs.trim()) {
+      var booked_slots = bs.split(',');
+      $.each(booked_slots, function (index, value) {
+        $("select option[value='"+ value + "']").attr('disabled', true );
+      });
+	}
+   });
+</script>
