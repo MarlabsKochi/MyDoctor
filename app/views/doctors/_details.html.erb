@@ -31,6 +31,9 @@
       </div>
       <div class="col-sm-6">
         <%=render :partial => "doctors/manage_appointment"%>
+        <% if doctor_signed_in? %>
+          <%=render :partial => "appointments/appointments"%>
+        <% end %>
       </div>
     </div>
   </div>

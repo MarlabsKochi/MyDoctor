@@ -2,6 +2,7 @@ class DoctorsController < ApplicationController
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
   before_action :get_cities, only: [:edit, :cities]
   before_action :set_time_slots, only: [:show]
+  before_action :set_appointments, only: [:show]
   include EntityHelper
 
   def index
@@ -43,6 +44,10 @@ class DoctorsController < ApplicationController
 
     def set_time_slots
       @time_slots = @doctor.time_slots
+    end
+
+    def set_appointments
+      @appointments = @doctor.appointments
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

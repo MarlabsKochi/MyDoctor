@@ -7,4 +7,9 @@
     	<%= image_tag("missing_patient_avatar.png",size: "100x100") %>
     <% end %>
   </div>
+  <div>
+  <% if patient_signed_in? %>
+  	<%=render :partial => "appointments/appointments"%>
+  <% end %>
+  </div>
 </div>
