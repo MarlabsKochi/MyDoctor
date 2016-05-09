@@ -1,2 +1,44 @@
-<h1>Congarts Your Appointment Booked</h1>
+<h3 class="text-center">Congrats Your Appointment Booked!</h3></br>
+<div class="container"style="background-color: rgba(183, 190, 193, 0.53);">
+<div class="row">
+<div class="col-md-6" style="margin-bottom:4%">
+<div>
+<b>Appointment Date: <%= @appointment.date %></b></div>
+<br>
+<b>Appointment time: <%= @appointment.time.strftime("%H:%M") %></b>
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-md-4" style="margin-bottom:4%">
+<b><h4>Booked By</h4></b>
+<div>
+<% if @appointment.patient.avatar.present? %>
+<%= image_tag(@appointment.patient.avatar.url(:small), size:"100x100") %>
+<% else %>
+<%= image_tag("missing_patient_avatar.png",size: "100x100") %>
+ <% end %></div>
+Name: <%= @appointment.patient.name %><br>
+Phone: <%= @appointment.patient.phone_number %><br>
+Address: <%= @appointment.patient.address %></div>
+
+
+<div class="col-md-4" style="margin-bottom:4%">
+<h4>Booked for</h4>
+<div>
+<% if @appointment.doctor.avatar.present? %>
+<%= image_tag(@appointment.doctor.avatar.url(:small), size:"100x100") %>
+<% else %>
+<%= image_tag("missing_doctor_avatar.png",size: "100x100") %>
+ <% end %></div>
+Doctor:<%= @appointment.doctor.name %><br>
+Contact no:<%= @appointment.doctor.phone_number %><br>
+Hospital:<%= @appointment.doctor.hospital_name %></div></div>
+</div>
+
+<script type="text/javascript">
+swal('appointment booked!', 'great','success');
+</script>
+
 
