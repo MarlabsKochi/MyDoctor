@@ -1,11 +1,12 @@
 <h3 class="text-center">Congrats Your Appointment Booked!</h3></br>
 <div class="container"style="background-color: rgba(183, 190, 193, 0.53);">
+
 <div class="row">
 <div class="col-md-6" style="margin-bottom:4%">
 <div>
-<b>Appointment Date: <%= @appointment.date %></b></div>
-<br>
-<b>Appointment time: <%= @appointment.time.strftime("%H:%M") %></b>
+<div class="glyphicon glyphicon-calendar"></div> <b>On <%= @appointment.date.strftime("%dth %B") %> 2016 </b></div>
+
+<div class="glyphicon glyphicon-time"></div> <b>At <%= @appointment.time.strftime("%I:%M %p") %></b>
 </div>
 </div>
 
@@ -40,5 +41,7 @@ Hospital:<%= @appointment.doctor.hospital_name %></div></div>
 <script type="text/javascript">
 swal('appointment booked!', 'great','success');
 </script>
+
+
 
 
