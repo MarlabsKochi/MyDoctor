@@ -3,15 +3,13 @@
 <% if doctor_signed_in? %>
 <button class="accordion">Manage Your Appointments</button>
 <div class="panel">
-  <br>
-  <%= render partial: "time_slots/time_slots" %>
-  <br>
   <%= render partial: 'time_slots/form' %>
 <% elsif patient_signed_in? %>
   <%= link_to "Create Appointment", "/appointments/new?doctor_id=#{params[:id]}" , doctor_id: params[:id], class: "btn btn-info btn-xs", style:"float:right" %>
   <br>
-  <%= render partial: "time_slots/time_slots" %>
-<% end %> 
+<% end %>
+<br>
+<%= render partial: "time_slots/time_slots" %>
 </div>
 
 <script>
