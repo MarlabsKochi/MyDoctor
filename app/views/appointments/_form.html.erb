@@ -35,7 +35,7 @@
 
 <script>
   $(document).ready(function () {
-    $('.datepickerfield').datepicker({format: "dd/mm/yyyy", autoclose : true}).on("changeDate", function(e) {
+    $('.datepickerfield').datepicker({format: "dd/mm/yyyy", startDate: '-0d', autoclose : true}).on("changeDate", function(e) {
     	appointment_date = ($('#appointment_date').val());
         $('#loading-image').show();
     	$.ajax({
@@ -54,12 +54,6 @@
           	$('#submit_button').prop('disabled', false);
       	  }
       	  $("#appointment-time").html(data)
-          //var booked_slots = $.makeArray( $('#booked_slots').val() );
-          //$.each(booked_slots, function (index, value) {
-  			  //  $("select option[value='"+ value + "']").attr('disabled', true );
-  		    //});
-          //$("select option[value='12:00:00']").attr('disabled', true );
-          //$("select option[value='13:00:00']").attr('disabled', true );
         });
     });
   });
