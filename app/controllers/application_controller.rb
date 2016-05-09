@@ -11,14 +11,13 @@ class ApplicationController < ActionController::Base
       action_name == "new" ? "login" : "application"
     end
 
-
   protected
 
-    def configure_permitted_parameters
-    	if params.has_key?("doctor")
-        devise_parameter_sanitizer.for(:sign_up) << :name << :age << :phone_number << :doctor_category_id
-      elsif params.has_key?("patient")
-  	    devise_parameter_sanitizer.for(:sign_up) << :name << :age << :phone_number
-      end
-    end
+    # def configure_permitted_parameters
+    # 	if params[:controller].to_s == "patients/registrations"
+    #    devise_parameter_sanitizer.for(:sign_up) << :name << :age << :phone_number 
+    #   else
+    #    devise_parameter_sanitizer.for(:sign_up) << :name << :age << :phone_number << :doctor_category_ids 
+    #   end
+    # end
 end

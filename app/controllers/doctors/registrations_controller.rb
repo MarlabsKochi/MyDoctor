@@ -38,6 +38,10 @@ class Doctors::RegistrationsController < Devise::RegistrationsController
 
   # protected
 
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << :name << :age << :phone_number << :doctor_category_ids
+  end
+
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
   #   devise_parameter_sanitizer.for(:sign_up) << :attribute
