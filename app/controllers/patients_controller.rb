@@ -1,5 +1,6 @@
 class PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
+  before_action :set_appointments, only: [:show]
   include EntityHelper
 
   def index
@@ -32,6 +33,10 @@ class PatientsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_patient
       @patient = Patient.find(params[:id])
+    end
+
+    def set_appointments
+      @appointments = @patient.appointments
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

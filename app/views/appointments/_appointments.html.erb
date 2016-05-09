@@ -1,0 +1,42 @@
+<div style="color:black;">
+  <%if @message %>
+    <p class="alert alert-warning"><%=@message%></p>
+  <% end %>
+  <button class="accordion">Your Appointments</button>
+  <div class="panel" id="scroll">
+  <table class="table table-striped">
+    <thead>
+      <th>Date</th>
+      <th>Time</th>
+      <% if doctor_signed_in? %>
+        <th>Patient</th>
+      <% else %>
+        <th>Doctor</th>
+      <% end %>
+    </thead>
+    <%@appointments.each do |a|%>
+      <tr>
+        <td><%=a.date.strftime("%d %b")%></td>
+        <td><%=a.time.strftime("%I:%M %p")%></td>
+        <% if doctor_signed_in? %>
+        <td><%=link_to a.patient.name, patient_path(a.patient)%></td>
+        <% else %>
+        <td><%=link_to a.doctor.name, doctor_path(a.doctor)%></td>
+        <% end %>
+      </tr>
+    <%end%>
+  </table>
+  </div>
+</div>
+
+<script>
+var acc = $(".accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].onclick = function(){
+        this.classList.toggle("active");
+        this.nextElementSibling.classList.toggle("show");
+  }
+}
+</script>
