@@ -2,5 +2,4 @@ languages:
   Ruby: true
 exclude_paths:
 - "app/assets/"
-- "app/spec"
-- .Gemfile.lock
+- "spec"
