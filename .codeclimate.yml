@@ -3,3 +3,4 @@ languages:
 exclude_paths:
 - "app/assets/"
 - "spec"
+- "db"
