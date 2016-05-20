@@ -1,5 +1,7 @@
 <div class="container">
+  <h2>Listing Doctors for <%= @doctor_category.name%></h2>
   <div class="row">
+    <br>
     <div class="col-md-7">
       <form class="form-inline" role="form">
         <%= form_tag("/doctor_categories/#{params[:id]}", method: "get") do %>
@@ -35,10 +37,10 @@
       </div>
     </div>
   </div>
+  <br>
 </div>
 
 <div class="container">
-  <h2>Listing Doctors for <%= @doctor_category.name%></h2>
   <div class="row">
     <% @doctors.all.each do |doctor| %>
 	    <div class="col-md-3" style="margin-bottom:2%;">
