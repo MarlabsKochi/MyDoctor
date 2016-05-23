@@ -12,6 +12,9 @@
     <header>
       <%#= render 'layouts/navigation' %>
       <%= render 'layouts/bootstrap' %>
+      <% if action_name.to_s != "new" && !current_doctor.present? && !current_patient.present? %>
+        <%= render 'layouts/sliders' %>
+      <% end %>
     </header>
     <main role="main">
        <%= render 'layouts/messages' %>
