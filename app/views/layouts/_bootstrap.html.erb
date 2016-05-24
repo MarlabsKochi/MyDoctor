@@ -8,10 +8,14 @@
 	<title>DOCTOR - Responsive HTML &amp; Bootstrap Template</title>
 	<%= stylesheet_link_tag 'font-awesome.min'%>
 	<%= stylesheet_link_tag 'bootstrap.min'%>
-    <%= stylesheet_link_tag 'style'%>	
+    <%= stylesheet_link_tag 'style'%>
+    <%#= javascript_include_tag 'jquery-2.1.1', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'smoothscroll', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'bootstrap.min', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'custom', 'data-turbolinks-track' => true %>
+	<%#= javascript_include_tag 'modernizr', 'data-turbolinks-track' => true %>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
-	<%= javascript_include_tag 'modernizr' %>
 	<!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
@@ -19,7 +23,6 @@
 
 </head>
 <body>
-	
 	<!-- ====================================================
 	header section -->
 	<header class="top-header">
@@ -56,233 +59,7 @@
 			</div>
 		</div>
 	</header> <!-- end of header area -->
-
-	<!-- about section -->
-<!-- 	<section class="about text-center" id="about">
-		<div class="container">
-			<div class="row">
-				<h2>about us</h2>
-				<h4>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</h4>
-				<div class="col-md-4 col-sm-6">
-					<div class="single-about-detail clearfix">
-						<div class="about-img">
-							<%= image_tag 'item1.jpg', class:"img-responsive" %>
-						</div>
-						<div class="about-details">
-							<div class="pentagon-text">
-								<h1>C</h1>
-							</div>
-							<h3>Children’s specialist</h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-6">
-					<div class="single-about-detail">
-						<div class="about-img">
-							<%= image_tag 'item2.jpg', class:"img-responsive" %>
-						</div>
-						<div class="about-details">
-							<div class="pentagon-text">
-								<h1>W</h1>
-							</div>
-
-							<h3>Children’s specialist</h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-6">
-					<div class="single-about-detail">
-						<div class="about-img">
-							<%= image_tag 'item3.jpg', class:"img-responsive" %>
-						</div>
-						<div class="about-details">
-							<div class="pentagon-text">
-								<h1>M</h1>
-							</div>
-							<h3>Children’s specialist</h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> --><!-- end of about section -->
-
-
-	<!-- service section starts here -->
-<!-- 	<section class="service text-center" id="service">
-		<div class="container">
-			<div class="row">
-				<h2>our services</h2>
-				<h4>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</h4>
-				<div class="col-md-3 col-sm-6">
-					<div class="single-service">
-						<div class="single-service-img">
-							<div class="service-img">
-								<%= image_tag 'service1.png', class:"heart img-responsive" %>
-							</div>
-						</div>
-						<h3>Heart problem</h3>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6">
-					<div class="single-service">
-						<div class="single-service-img">
-							<div class="service-img">
-								<%= image_tag 'service2.png', class:"brain img-responsive" %>
-							</div>
-						</div>
-						<h3>brain problem</h3>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6">
-					<div class="single-service">
-						<div class="single-service-img">
-							<div class="service-img">
-								<%= image_tag 'service3.png', class:"knee img-responsive" %>
-							</div>
-						</div>
-						<h3>knee problem</h3>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6">
-					<div class="single-service">
-						<div class="single-service-img">
-							<div class="service-img">
-							<%= image_tag 'service4.png', class:"bone img-responsive" %>
-							</div>
-						</div>
-						<h3>human bones problem</h3>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> --><!-- end of service section -->
-
-
-	<!-- team section -->
-<!-- 	<section class="team" id="team">
-		<div class="container">
-			<div class="row">
-				<div class="team-heading text-center">
-					<h2>our team</h2>
-					<h4>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</h4>
-				</div>
-				<div class="col-md-2 single-member col-sm-4">
-					<div class="person">
-						<%= image_tag 'member1.jpg', class:"img-responsive" %>
-					</div>
-					<div class="person-detail">
-						<div class="arrow-bottom"></div>
-						<h3>Dr. M. Weiner, M.D.</h3>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-					</div>
-				</div>
-				<div class="col-md-2 single-member col-sm-4">
-					<div class="person-detail">
-						<div class="arrow-top"></div>
-						<h3>Dr. Danielle, M.D.</h3>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-					</div>
-					<div class="person">
-						<%= image_tag 'member2.jpg', class:"img-responsive" %>
-					</div>
-				</div>
-				<div class="col-md-2 single-member col-sm-4">
-					<div class="person">
-						<%= image_tag 'member3.jpg', class:"img-responsive" %>
-					</div>
-					<div class="person-detail">
-						<div class="arrow-bottom"></div>
-						<h3>Dr. Caitlin, M.D.</h3>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-					</div>
-				</div>
-				<div class="col-md-2 single-member col-sm-4">
-					<div class="person-detail">
-						<div class="arrow-top"></div>
-						<h3>Dr. Joseph, M.D.</h3>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-					</div>
-					<div class="person">
-						<%= image_tag 'member4.jpg', class:"img-responsive" %>
-					</div>
-				</div>
-				<div class="col-md-2 single-member col-sm-4">
-					<div class="person">
-						<%= image_tag 'member5.jpg', class:"img-responsive" %>
-					</div>
-					<div class="person-detail">
-						<div class="arrow-bottom"></div>
-						<h3>Dr. Michael, M.D.</h3>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-					</div>
-				</div>
-				<div class="col-md-2 single-member col-sm-4">
-					<div class="person-detail">
-						<div class="arrow-top"></div>
-						<h3>Dr. Hasina, M.D.</h3>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-					</div>
-					<div class="person">
-						<%= image_tag 'member6.jpg', class:"img-responsive" %>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> --><!-- end of team section -->
-
-	<!-- map section -->
-<!-- 	<div class="api-map" id="contact">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12 map" id="map"></div>
-			</div>
-		</div>
-	</div> --><!-- end of map section -->
-
-	<!-- contact section starts here -->
-<!-- 	<section class="contact">
-		<div class="container">
-			<div class="row">
-				<div class="contact-caption clearfix">
-					<div class="contact-heading text-center">
-						<h2>contact us</h2>
-					</div>
-					<div class="col-md-5 contact-info text-left">
-						<h3>contact information</h3>
-						<div class="info-detail">
-							<ul><li><i class="fa fa-calendar"></i><span>Monday - Friday:</span> 9:30 AM to 6:30 PM</li></ul>
-							<ul><li><i class="fa fa-map-marker"></i><span>Address:</span> 123 Some Street , London, UK, CP 123</li></ul>
-							<ul><li><i class="fa fa-phone"></i><span>Phone:</span> (032) 987-1235</li></ul>
-							<ul><li><i class="fa fa-fax"></i><span>Fax:</span> (123) 984-1234</li></ul>
-							<ul><li><i class="fa fa-envelope"></i><span>Email:</span> info@doctor.com</li></ul>
-						</div>
-					</div>
-					<div class="col-md-6 col-md-offset-1 contact-form">
-						<h3>leave us a message</h3>
-
-						<form class="form">
-							<input class="name" type="text" placeholder="Name">
-							<input class="email" type="email" placeholder="Email">
-							<input class="phone" type="text" placeholder="Phone No:">
-							<textarea class="message" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
-							<input class="submit-btn" type="submit" value="SUBMIT">
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> --><!-- end of contact section -->
-
 	<!-- script tags
 	============================================================= -->
-	<%= javascript_include_tag 'jquery-2.1.1' %>
-	<%= javascript_include_tag 'gmaps' %>
-	<%= javascript_include_tag 'smoothscroll' %>
-	<%= javascript_include_tag 'bootstrap.min' %>
-	<%= javascript_include_tag 'custom' %>
 </body>
 </html>

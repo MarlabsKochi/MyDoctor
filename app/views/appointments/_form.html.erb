@@ -15,11 +15,10 @@
   <div class="field">
     <%= f.label :date %><br>
     <%= f.text_field :date, class:'datepickerfield' %>
-  </div><br><br>
+  </div>
+  <div id="appointment-time"></div>
 
   <div id="loading-image" style="display:none;"><%=image_tag 'ajax-loader.gif'%></div>
-
-  <div id="appointment-time"></div>
 
   <%= hidden_field_tag 'doctor_id', params[:doctor_id] %>
 
@@ -54,6 +53,12 @@
           	$('#submit_button').prop('disabled', false);
       	  }
       	  $("#appointment-time").html(data)
+          bs = $('#booked_slots').val();
+          var booked_slots = bs.split(',');
+          alert("booked slots form page =>"+bs);
+          $.each(booked_slots, function (index, value) {
+            $("select option[value='"+ value + "']").attr('disabled', true );
+          });
         });
     });
   });
@@ -61,6 +66,7 @@
   $(document).ajaxComplete(function(){
     bs = $('#booked_slots').val();
     var booked_slots = bs.split(',');
+    alert("booked slots form page =>"+bs);
     $.each(booked_slots, function (index, value) {
       $("select option[value='"+ value + "']").attr('disabled', true );
     });
