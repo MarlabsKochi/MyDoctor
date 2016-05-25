@@ -1,0 +1,26 @@
+	<!-- about section -->
+	<section class="about text-center" id="about">
+		<div class="container" style="padding-top:100px;">
+			<div class="row">
+				<h2>doctor categories</h2>
+				<!-- <h4>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</h4> -->
+				<% DoctorCategory.where(id: [17, 18, 19,23]).each do |dc| %>
+				<div class="col-md-3 col-sm-6">
+					<div class="single-about-detail clearfix">
+						<div class="about-img">
+							<%= link_to (image_tag "#{dc.name.downcase}"+".jpg", class:"img-responsive"), dc  %>
+						</div>
+						<div class="about-details">
+							<div class="pentagon-text">
+								<h1><%= dc.name[0]%></h1>
+							</div>
+							<h3><%= dc.name %></h3>
+							<p></p>
+						</div>
+					</div>
+				</div>
+				<% end %>
+			</div>
+		</div>
+	</section> 
+	<!-- end of about section -->

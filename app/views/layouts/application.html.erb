@@ -10,11 +10,20 @@
   </head>
   <body>
     <header>
-      <%= render 'layouts/navigation' %>
+      <%#= render 'layouts/navigation' %>
+      <% if action_name.to_s != "time_selector" %>
+        <%= render 'layouts/bootstrap' %>
+      <% end %>
+      <% if action_name.to_s != "new" && action_name.to_s != "show" && !current_doctor.present? && !current_patient.present? %>
+        <%#= render 'layouts/sliders' %>
+        <%= render 'layouts/about_us' %>
+      <% end %>
     </header>
     <main role="main">
        <%= render 'layouts/messages' %>
-       <%= yield %>
+       <div style="padding-top:100px;">
+         <%= yield %>
+       </div>
     </main>
   </body>
 </html>

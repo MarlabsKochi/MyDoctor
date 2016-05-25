@@ -13,7 +13,7 @@ class Doctor < ActiveRecord::Base
   has_many :time_slots
   accepts_nested_attributes_for :time_slots
 
-  has_attached_file :avatar, styles: { large: "520x520>", medium: "300x300>", small: "256x256>", thumb: "100x100>" }, default_url: ":style/missing_avatar.png"
+  has_attached_file :avatar, styles: { detail: "293X390>", large: "520x520>", medium: "300x300>", small: "256x256>", thumb: "100x100>" }, default_url: ":style/missing_avatar.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   # Validations

@@ -1,4 +1,51 @@
-<div class="container">
+ <section class="team" id="team">
+    <div class="container">
+      <div class="row">
+        <h2><%= "#{@doctor_category.name}'s" %></h2><br>
+        <div class="team-heading text-center">
+        </div>
+        <% @doctors.all.each_with_index do |doctor, index| %>
+          <% if (index%2 == 0) %>
+            <div class="col-md-3 single-member col-sm-4">
+              <div class="person">
+                <% if doctor.avatar.present? %>
+                  <%= image_tag(doctor.avatar.url(:detail), size: "293x390", class:"img-responsive") %>
+                <% else %>
+                  <%= image_tag("missing_doctor_avatar.png", class:"img-responsive") %>
+                <% end %>
+                <%#= image_tag 'member1.jpg', class:"img-responsive" %>
+              </div>
+              <div class="person-detail">
+                <div class="arrow-bottom"></div>
+                <h3><%= doctor.name %></h3>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
+              </div>
+            </div>
+          <% else %>
+            <div class="col-md-3 single-member col-sm-4">
+              <div class="person-detail">
+                <div class="arrow-top"></div>
+                <h3><%= doctor.name %></h3>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
+              </div>
+              <div class="person">
+                <%#= image_tag 'member2.jpg', class:"img-responsive" %>
+                <% if doctor.avatar.present? %>
+                  <%= image_tag(doctor.avatar.url(:detail), size: "293x390", class:"img-responsive") %>
+                <% else %>
+                  <%= image_tag("missing_doctor_avatar.png", class:"img-responsive") %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+
+<div class="container" style="padding-top:70px;">
+  <h2>Listing Doctors for <%= @doctor_category.name%></h2><br>
   <div class="row">
     <div class="col-md-7">
       <form class="form-inline" role="form">
@@ -34,11 +81,10 @@
           </ul>
       </div>
     </div>
-  </div>
+  </div><br>
 </div>
 
 <div class="container">
-  <h2>Listing Doctors for <%= @doctor_category.name%></h2>
   <div class="row">
     <% @doctors.all.each do |doctor| %>
 	    <div class="col-md-3" style="margin-bottom:2%;">

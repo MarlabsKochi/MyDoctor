@@ -45,7 +45,8 @@ class DoctorCategoriesController < ApplicationController
     end
 
     def resolve_layout
-      "doctor_category" 
+      "application"
+      #"doctor_category" 
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
