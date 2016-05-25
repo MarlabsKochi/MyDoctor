@@ -1,52 +1,26 @@
 	<!-- about section -->
-<!-- 	<section class="about text-center" id="about">
-		<div class="container">
+	<section class="about text-center" id="about">
+		<div class="container" style="padding-top:100px;">
 			<div class="row">
-				<h2>about us</h2>
-				<h4>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</h4>
-				<div class="col-md-4 col-sm-6">
+				<h2>doctor categories</h2>
+				<!-- <h4>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</h4> -->
+				<% DoctorCategory.where(id: [17, 18, 19,23]).each do |dc| %>
+				<div class="col-md-3 col-sm-6">
 					<div class="single-about-detail clearfix">
 						<div class="about-img">
-							<%= image_tag 'item1.jpg', class:"img-responsive" %>
+							<%= link_to (image_tag "#{dc.name.downcase}"+".jpg", class:"img-responsive"), dc  %>
 						</div>
 						<div class="about-details">
 							<div class="pentagon-text">
-								<h1>C</h1>
+								<h1><%= dc.name[0]%></h1>
 							</div>
-							<h3>Children’s specialist</h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
+							<h3><%= dc.name %></h3>
+							<p></p>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4 col-sm-6">
-					<div class="single-about-detail">
-						<div class="about-img">
-							<%= image_tag 'item2.jpg', class:"img-responsive" %>
-						</div>
-						<div class="about-details">
-							<div class="pentagon-text">
-								<h1>W</h1>
-							</div>
-
-							<h3>Children’s specialist</h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-6">
-					<div class="single-about-detail">
-						<div class="about-img">
-							<%= image_tag 'item3.jpg', class:"img-responsive" %>
-						</div>
-						<div class="about-details">
-							<div class="pentagon-text">
-								<h1>M</h1>
-							</div>
-							<h3>Children’s specialist</h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
-						</div>
-					</div>
-				</div>
+				<% end %>
 			</div>
 		</div>
-	</section> --><!-- end of about section -->
+	</section> 
+	<!-- end of about section -->
